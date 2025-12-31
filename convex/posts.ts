@@ -1,4 +1,4 @@
-import { mutation } from "./_generated/server";
+import { mutation, query } from "./_generated/server";
 import { ConvexError, v } from "convex/values";
 import { authComponent } from "./auth";
 
@@ -19,5 +19,13 @@ export const createPost = mutation({
     });
 
     return blogArticle;
+  },
+});
+
+export const getPosts = query({
+  args: {},
+  handler: async (ctx) => {
+    const posts = await ctx.db.query("posts").order("desc").collect();
+    return posts;
   },
 });
