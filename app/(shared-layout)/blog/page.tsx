@@ -7,6 +7,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
 
+export const dynamic = "force-static";
+
 export default async function BlogPage() {
   return (
     <div className="py-12">
@@ -27,7 +29,6 @@ export default async function BlogPage() {
 
 async function LoadBlogList() {
   const data = await fetchQuery(api.posts.getPosts);
-
   return (
     <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
       {data?.map((post) => (
