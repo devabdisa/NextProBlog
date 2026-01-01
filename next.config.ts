@@ -8,6 +8,11 @@ const nextConfig: NextConfig = {
         protocol: "https",
         port: "",
       },
+      {
+        hostname: "fast-emu-945.convex.cloud",
+        protocol: "https",
+        port: "",
+      },
     ],
   },
 };

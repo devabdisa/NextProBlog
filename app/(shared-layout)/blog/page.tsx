@@ -26,7 +26,6 @@ export default async function BlogPage() {
 }
 
 async function LoadBlogList() {
-  await new Promise((resolve) => setTimeout(resolve, 5000));
   const data = await fetchQuery(api.posts.getPosts);
 
   return (
@@ -35,10 +34,13 @@ async function LoadBlogList() {
         <Card key={post._id} className="pt-0">
           <div className="relative h-48 w-full overflow-hidden ">
             <Image
-              src="https://images.unsplash.com/photo-1615412704911-55d589229864?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bmF0dXJlJTIwYmFja2dyb3VuZHxlbnwwfHwwfHx8MA%3D%3D"
+              src={
+                post.imageUrl ??
+                "https://images.unsplash.com/photo-1615412704911-55d589229864?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bmF0dXJlJTIwYmFja2dyb3VuZHxlbnwwfHwwfHx8MA%3D%3D"
+              }
               alt="Random unsplash nature image"
               fill
-              className="rounded-t-lg"
+              className="rounded-t-lg object-cover"
             />
           </div>
           <CardContent>
