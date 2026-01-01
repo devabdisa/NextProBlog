@@ -1,0 +1,69 @@
+import { buttonVariants } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import { api } from "@/convex/_generated/api";
+import { Id } from "@/convex/_generated/dataModel";
+import { fetchQuery } from "convex/nextjs";
+import { ArrowLeft } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+
+interface PostIdRouteProps {
+  params: Promise<{
+    postId: Id<"posts">;
+  }>;
+}
+
+export default async function PostIdRoute({ params }: PostIdRouteProps) {
+  const { postId } = await params;
+  const post = await fetchQuery(api.posts.getPostById, { postId: postId });
+
+  if (!post) {
+    return (
+      <div>
+        <h1 className="text-6xl font-extrabold text-red-500 py-20">
+          No post found
+        </h1>
+      </div>
+    );
+  }
+
+  return (
+    <div className="max-w-3xl mx-auto animate-in fade-in duration-100 relative">
+      <Link
+        className={buttonVariants({
+          variant: "outline",
+          className: "mb-4",
+        })}
+        href="/blog"
+      >
+        {" "}
+        <ArrowLeft className="size-4" />
+        Go Back
+      </Link>
+      <div className="relative w-full h-100 mb-8 rounded-t-xl shadow-sm overflow-hidden">
+        <Image
+          src={
+            post.imageUrl ??
+            "https://images.unsplash.com/photo-1615412704911-55d589229864?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bmF0dXJlJTIwYmFja2dyb3VuZHxlbnwwfHwwfHx8MA%3D%3D"
+          }
+          alt={post.title}
+          fill
+          className=" object-cover hover:scale-105 transition-transform duration-500"
+        />
+      </div>
+      <div className="space-y-4 flex flex-col">
+        <h1 className="text-4xl font-bold tracking-tight text-foreground">
+          {post.title}
+        </h1>
+        <p className="text-sm text-muted-foreground">
+          Posted at: {new Date(post._creationTime).toLocaleDateString("en-US")}
+        </p>
+        <Separator className="my-8" />
+        <p className="text-lg leading-relaxed text-foreground/90 whitespace-pre-wrap">
+          {post.body}
+        </p>
+        <Separator className="my-8" />
+      </div>
+    </div>
+  );
+}
