@@ -11,18 +11,23 @@ import { Button } from "../ui/button";
 import { Textarea } from "../ui/textarea";
 import { useParams } from "next/navigation";
 import { Id } from "@/convex/_generated/dataModel";
-import { useMutation, useQuery } from "convex/react";
+import {
+  Preloaded,
+  useMutation,
+  usePreloadedQuery,
+} from "convex/react";
 import { api } from "@/convex/_generated/api";
 import z from "zod";
 import { toast } from "sonner";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Separator } from "../ui/separator";
 
-export default function CommentSection() {
+export default function CommentSection(props: {
+  preloadedComments: Preloaded<typeof api.comments.getCommentsById>;
+}) {
   const params = useParams<{ postId: Id<"posts"> }>();
-  const data = useQuery(api.comments.getCommentsById, {
-    postId: params.postId,
-  });
+  const data = usePreloadedQuery(props.preloadedComments);
+
   const [isPending, startTransition] = useTransition();
   const form = useForm({
     resolver: zodResolver(commentSchema),
