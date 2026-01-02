@@ -1,5 +1,6 @@
 import { buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import CommentSection from "@/components/web/CommentSection";
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
 import { fetchQuery } from "convex/nextjs";
@@ -63,6 +64,7 @@ export default async function PostIdRoute({ params }: PostIdRouteProps) {
           {post.body}
         </p>
         <Separator className="my-8" />
+        <CommentSection />
       </div>
     </div>
   );
