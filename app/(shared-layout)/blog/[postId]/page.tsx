@@ -1,8 +1,10 @@
 import { buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import CommentSection from "@/components/web/CommentSection";
+import { PostPresence } from "@/components/web/PostPresence";
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
+import { getToken } from "@/lib/auth-server";
 import { fetchQuery, preloadQuery } from "convex/nextjs";
 import { ArrowLeft } from "lucide-react";
 import { Metadata } from "next";
@@ -37,11 +39,14 @@ export async function generateMetadata({
 export default async function PostIdRoute({ params }: PostIdRouteProps) {
   const { postId } = await params;
 
-  const [post, preloadedComments] = await Promise.all([
+  const token = await getToken();
+
+  const [post, preloadedComments, userId] = await Promise.all([
     await fetchQuery(api.posts.getPostById, { postId: postId }),
     await preloadQuery(api.comments.getCommentsById, {
       postId: postId,
     }),
+    await fetchQuery(api.presence.getUserId, {}, { token }),
   ]);
 
   if (!post) {
@@ -82,9 +87,14 @@ export default async function PostIdRoute({ params }: PostIdRouteProps) {
         <h1 className="text-4xl font-bold tracking-tight text-foreground">
           {post.title}
         </h1>
-        <p className="text-sm text-muted-foreground">
-          Posted at: {new Date(post._creationTime).toLocaleDateString("en-US")}
-        </p>
+        <div className="flex items-center gap-2">
+          <p className="text-sm text-muted-foreground">
+            Posted on:{" "}
+            {new Date(post._creationTime).toLocaleDateString("en-US")}
+          </p>
+
+          {userId && <PostPresence roomId={post._id} userId={userId} />}
+        </div>
         <Separator className="my-8" />
         <p className="text-lg leading-relaxed text-foreground/90 whitespace-pre-wrap">
           {post.body}
