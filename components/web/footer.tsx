@@ -22,7 +22,7 @@ export function Footer() {
           </Link>
         </div>
         <p className="text-xs text-muted-foreground/60">
-          © {new Date().getFullYear()} NextProBlog. All rights reserved.
+          © 2026 NextProBlog. All rights reserved.
         </p>
       </div>
     </footer>
