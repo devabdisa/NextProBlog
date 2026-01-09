@@ -10,7 +10,7 @@ const nextConfig: NextConfig = {
         port: "",
       },
       {
-        hostname: "fast-emu-945.convex.cloud",
+        hostname: "blessed-stingray-393.convex.site",
         protocol: "https",
         port: "",
       },
