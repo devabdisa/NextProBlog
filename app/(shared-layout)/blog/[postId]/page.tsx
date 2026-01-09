@@ -71,10 +71,11 @@ export default async function PostIdRoute({ params }: PostIdRouteProps) {
     );
   }
 
+
   return (
-    <article className="min-h-screen pb-20 animate-in fade-in slide-in-from-bottom-4 duration-500">
+    <article className="min-h-screen pb-20 animate-in fade-in slide-in-from-bottom-4 duration-500 bg-background">
       {/* Hero Header with Image Background */}
-      <div className="relative h-[50vh] min-h-[400px] w-full overflow-hidden">
+      <div className="relative h-[60vh] min-h-100 w-full overflow-hidden">
         <Image
           src={
             post.imageUrl ??
@@ -82,31 +83,33 @@ export default async function PostIdRoute({ params }: PostIdRouteProps) {
           }
           alt={post.title}
           fill
-          className="object-cover brightness-50"
+          className="object-cover"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent" />
+        {/* Dark Overlay for Text Contrast */}
+        <div className="absolute inset-0 bg-black/60" />
+        <div className="absolute inset-0 bg-linear-to-t from-background/10 to-transparent" />
         
-        <div className="absolute bottom-0 left-0 right-0 p-6 md:p-12 container mx-auto max-w-4xl">
+        <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-12 container mx-auto max-w-4xl z-10">
            <Link
             href="/blog"
-            className="inline-flex items-center text-sm font-medium text-white/80 hover:text-white mb-6 hover:underline transition-all"
+            className="inline-flex items-center text-sm font-medium text-white/90 hover:text-white mb-8 hover:underline transition-all w-fit"
           >
-            <ArrowLeft className="mr-1 h-4 w-4" /> Back to Blog
+            <ArrowLeft className="mr-2 h-4 w-4" /> Back to Blog
           </Link>
 
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-white mb-6 drop-shadow-lg">
+          <h1 className="text-4xl md:text-5xl lg:text-7xl font-black tracking-tight text-white mb-6 drop-shadow-lg leading-tight">
             {post.title}
           </h1>
 
-          <div className="flex flex-wrap items-center gap-6 text-white/90">
-             <div className="flex items-center gap-2">
-                <div className="h-10 w-10 rounded-full bg-primary/20 backdrop-blur-sm flex items-center justify-center border border-white/20">
-                   <span className="font-bold text-white">NP</span>
+          <div className="flex flex-wrap items-center gap-6 text-white/95 pb-4">
+             <div className="flex items-center gap-3">
+                <div className="h-12 w-12 rounded-full bg-primary/20 backdrop-blur-md flex items-center justify-center border border-white/30 shadow-sm">
+                   <span className="font-bold text-white text-lg">NP</span>
                 </div>
                 <div>
-                   <p className="text-sm font-medium">NextPro Author</p>
-                   <p className="text-xs text-white/70">
+                   <p className="text-base font-semibold">NextPro Author</p>
+                   <p className="text-sm text-white/80 opacity-90">
                        {new Date(post._creationTime).toLocaleDateString("en-US", {
                          weekday: 'long',
                          year: 'numeric', 
@@ -118,7 +121,7 @@ export default async function PostIdRoute({ params }: PostIdRouteProps) {
              </div>
              
              {userId && (
-                <div className="bg-black/30 backdrop-blur-md rounded-full px-4 py-1.5 border border-white/10">
+                <div className="bg-white/10 backdrop-blur-md rounded-full px-4 py-2 border border-white/20">
                    <PostPresence roomId={post._id} userId={userId} />
                 </div>
              )}
@@ -126,17 +129,20 @@ export default async function PostIdRoute({ params }: PostIdRouteProps) {
         </div>
       </div>
 
-      <div className="container mx-auto px-4 max-w-3xl mt-12">
-        <div className="prose prose-lg dark:prose-invert prose-blue max-w-none">
-          <p className="text-xl leading-8 text-foreground/80 font-serif whitespace-pre-wrap">
+      <div className="container mx-auto px-4 max-w-4xl mt-16">
+        <div className="bg-card text-card-foreground p-0 md:p-0">
+          <p className="text-xl md:text-2xl leading-relaxed text-foreground/90 font-serif whitespace-pre-wrap tracking-wide">
             {post.body}
           </p>
         </div>
         
         <Separator className="my-16" />
         
-        <div className="bg-muted/30 rounded-3xl p-6 md:p-10 border border-border/50">
-           <h3 className="text-2xl font-bold mb-6">Discussion</h3>
+        <div className="bg-secondary/20 rounded-3xl p-6 md:p-10 border border-border/50 shadow-sm">
+           <h3 className="text-2xl font-bold mb-8 flex items-center gap-2">
+             Discussion 
+             <span className="text-sm font-normal text-muted-foreground bg-muted px-2 py-0.5 rounded-full border">Community</span>
+           </h3>
            <CommentSection preloadedComments={preloadedComments} />
         </div>
       </div>

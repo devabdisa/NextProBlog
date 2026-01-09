@@ -31,7 +31,7 @@ export default function BlogPage() {
             {Array.from({ length: 6 }).map((_, i) => (
               <div
                 key={i}
-                className="h-[450px] rounded-2xl bg-secondary/30 animate-pulse"
+                className="h-112.5 rounded-2xl bg-secondary/30 animate-pulse"
               />
             ))}
           </div>
@@ -58,7 +58,7 @@ export default function BlogPage() {
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 transition-opacity duration-300 group-hover:opacity-50" />
+                  <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent opacity-60 transition-opacity duration-300 group-hover:opacity-50" />
                   <div className="absolute bottom-4 left-4 right-4 translate-y-4 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
                     <span className="inline-flex items-center text-xs font-medium text-white/90 bg-white/10 backdrop-blur-md px-2 py-1 rounded-full border border-white/20">
                       Read Article <ArrowRight className="ml-1 h-3 w-3" />

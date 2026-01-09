@@ -12,7 +12,7 @@ export default function Home() {
     <div className="flex flex-col gap-20 pb-10">
       {/* Hero Section */}
       <section className="relative pt-20 pb-32 md:pt-32 md:pb-40 overflow-hidden">
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-background to-background opacity-50" />
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,var(--tw-gradient-stops))] from-primary/10 via-background to-background opacity-50" />
         
         <div className="container mx-auto px-4 max-w-6xl text-center">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/50 text-secondary-foreground text-sm font-medium mb-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
@@ -25,7 +25,7 @@ export default function Home() {
 
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 animate-in fade-in slide-in-from-bottom-6 duration-700 delay-100">
             Thoughts, Stories & <br className="hidden md:block" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-600">
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-primary to-purple-600">
               Ideas for the Future
             </span>
           </h1>
@@ -65,7 +65,7 @@ export default function Home() {
             Array.from({ length: 3 }).map((_, i) => (
               <div
                 key={i}
-                className="h-[400px] rounded-2xl bg-secondary/30 animate-pulse"
+                className="h-100 rounded-2xl bg-secondary/30 animate-pulse"
               />
             ))
           ) : posts.length === 0 ? (
@@ -126,7 +126,7 @@ export default function Home() {
 
       {/* About / Portfolio Section */}
       <section className="container mx-auto px-4 max-w-6xl mb-20">
-        <div className="rounded-3xl bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 p-8 md:p-12 overflow-hidden relative text-white">
+        <div className="rounded-3xl bg-linear-to-br from-zinc-900 to-zinc-950 border border-white/10 p-8 md:p-12 overflow-hidden relative text-white">
           <div className="absolute top-0 right-0 -mt-20 -mr-20 w-80 h-80 bg-primary/20 rounded-full blur-3xl opacity-50" />
           <div className="absolute bottom-0 left-0 -mb-20 -ml-20 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl opacity-50" />
           
@@ -150,7 +150,7 @@ export default function Home() {
             </div>
             {/* If there was an image of the user, it would go here. For now, a stylized graphic or placeholder. */}
             <div className="hidden md:flex justify-center items-center">
-               <div className="relative w-48 h-48 md:w-64 md:h-64 rounded-full bg-gradient-to-tr from-primary to-purple-500 p-[2px]">
+               <div className="relative w-48 h-48 md:w-64 md:h-64 rounded-full bg-linear-to-tr from-primary to-purple-500 p-0.5">
                  <div className="w-full h-full rounded-full bg-zinc-950 flex items-center justify-center overflow-hidden">
                     <span className="text-6xl animate-pulse">👨‍💻</span>
                  </div>
