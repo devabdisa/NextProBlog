@@ -5,7 +5,6 @@ import React, { useState, useEffect, useRef } from "react";
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
 
 export function SearchInput() {
   const [term, setTerm] = useState("");
@@ -19,7 +18,10 @@ export function SearchInput() {
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(event.target as Node)
+      ) {
         setOpen(false);
       }
     }
@@ -37,17 +39,17 @@ export function SearchInput() {
   return (
     <div className="relative w-full max-w-sm" ref={containerRef}>
       <div className="relative">
-         <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
-         <Input
-           type="search"
-           placeholder="Search Posts..."
-           className="w-full pl-9 bg-secondary/50 border-transparent focus:bg-background focus:border-border transition-all duration-300 rounded-full"
-           value={term}
-           onChange={handleInputChange}
-           onFocus={() => setOpen(true)}
-         />
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
+        <Input
+          type="search"
+          placeholder="Search Posts..."
+          className="w-full pl-9 bg-secondary/50 border-transparent focus:bg-background focus:border-border transition-all duration-300 rounded-full"
+          value={term}
+          onChange={handleInputChange}
+          onFocus={() => setOpen(true)}
+        />
       </div>
-      
+
       {open && term.length >= 2 && (
         <div className="absolute top-full mt-2 w-full rounded-xl border border-border/50 bg-background/95 backdrop-blur-md shadow-xl overflow-hidden animate-in fade-in slide-in-from-top-2 z-50">
           {results === undefined ? (
@@ -56,7 +58,7 @@ export function SearchInput() {
             </div>
           ) : results.length === 0 ? (
             <div className="p-4 text-center text-sm text-muted-foreground">
-              No results found for "{term}"
+              No results found for {term}
             </div>
           ) : (
             <div className="py-1">
@@ -67,7 +69,9 @@ export function SearchInput() {
                   className="block px-4 py-3 hover:bg-secondary/50 text-sm transition-colors border-b last:border-0 border-border/40"
                   onClick={() => setOpen(false)}
                 >
-                  <p className="font-medium text-foreground truncate">{post.title}</p>
+                  <p className="font-medium text-foreground truncate">
+                    {post.title}
+                  </p>
                   <p className="text-muted-foreground text-xs pt-0.5 line-clamp-1">
                     {post.body}
                   </p>

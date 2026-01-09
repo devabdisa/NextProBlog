@@ -16,7 +16,7 @@ export function Navbar() {
   const router = useRouter();
   
   return (
-    <nav className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <nav className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
       <div className="container mx-auto px-4 max-w-6xl flex items-center justify-between py-4">
         <div className="flex items-center gap-8">
           <Link href="/" className="flex items-center gap-2 transition-transform hover:scale-105 active:scale-95">
