@@ -15,5 +15,5 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/blog","/create"], // Specify the routes the middleware applies to
+  matcher: ["/create"], // Specify the routes the middleware applies to
 };
