@@ -136,3 +136,25 @@ export const searchPosts = query({
     return results;
   },
 });
+
+export const getRecentPosts = query({
+  args: {
+    limit: v.number(),
+  },
+  handler: async (ctx, args) => {
+    const posts = await ctx.db.query("posts").order("desc").take(args.limit);
+    return await Promise.all(
+      posts.map(async (post) => {
+        const resolvedImage =
+          post.imageStorageId !== undefined
+            ? await ctx.storage.getUrl(post.imageStorageId)
+            : null;
+
+        return {
+          ...post,
+          imageUrl: resolvedImage,
+        };
+      })
+    );
+  },
+});
