@@ -3,6 +3,7 @@
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, Calendar, ArrowUpRight } from "lucide-react";
 
 export default function Home() {
@@ -65,8 +66,16 @@ export default function Home() {
             Array.from({ length: 3 }).map((_, i) => (
               <div
                 key={i}
-                className="h-100 rounded-2xl bg-secondary/30 animate-pulse"
-              />
+                className="rounded-2xl border border-border/40 bg-card overflow-hidden h-112.5 flex flex-col"
+              >
+                 <div className="h-48 bg-muted/60 animate-pulse" />
+                 <div className="p-6 flex flex-col gap-4 flex-1">
+                    <div className="h-4 w-24 bg-muted/60 rounded animate-pulse" />
+                    <div className="h-8 w-full bg-muted/60 rounded animate-pulse" />
+                    <div className="h-20 w-full bg-muted/40 rounded animate-pulse" />
+                    <div className="mt-auto h-4 w-32 bg-muted/60 rounded animate-pulse" />
+                 </div>
+              </div>
             ))
           ) : posts.length === 0 ? (
             <div className="col-span-full text-center py-20 text-muted-foreground">
@@ -80,12 +89,13 @@ export default function Home() {
                 className="group relative flex flex-col h-full rounded-2xl border border-border/50 bg-card overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-1 animate-in fade-in zoom-in-50 fill-mode-both"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div className="aspect-video w-full overflow-hidden bg-secondary">
+                 <div className="aspect-video w-full overflow-hidden bg-secondary relative">
                   {post.imageUrl ? (
-                    <img
+                    <Image
                       src={post.imageUrl}
                       alt={post.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center text-muted-foreground bg-secondary/50">
@@ -136,7 +146,7 @@ export default function Home() {
                 About the Author
               </h2>
               <p className="text-zinc-400 mb-6 text-lg leading-relaxed">
-                Hi, I'm Abdisa Ketema. I build accessible, pixel-perfect, and performant web experiences. 
+                Hi, I&apos;m Abdisa Ketema. I build accessible, pixel-perfect, and performant web experiences. 
                 I love exploring new technologies and sharing what I learn along the way.
               </p>
               <Link

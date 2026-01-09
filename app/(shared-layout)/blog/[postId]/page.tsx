@@ -129,16 +129,16 @@ export default async function PostIdRoute({ params }: PostIdRouteProps) {
         </div>
       </div>
 
-      <div className="container mx-auto px-4 max-w-4xl mt-16">
-        <div className="bg-card text-card-foreground p-0 md:p-0">
-          <p className="text-xl md:text-2xl leading-relaxed text-foreground/90 font-serif whitespace-pre-wrap tracking-wide">
+      <div className="w-full max-w-4xl mx-auto px-4 mt-16 block">
+        <div className="bg-card text-card-foreground p-0 md:p-0 w-full">
+          <p className="text-xl md:text-2xl leading-relaxed text-foreground/90 font-serif whitespace-pre-line wrap-break-word tracking-wide">
             {post.body}
           </p>
         </div>
         
         <Separator className="my-16" />
         
-        <div className="bg-secondary/20 rounded-3xl p-6 md:p-10 border border-border/50 shadow-sm">
+        <div className="bg-secondary/20 rounded-3xl p-6 md:p-10 border border-border/50 shadow-sm w-full">
            <h3 className="text-2xl font-bold mb-8 flex items-center gap-2">
              Discussion 
              <span className="text-sm font-normal text-muted-foreground bg-muted px-2 py-0.5 rounded-full border">Community</span>
