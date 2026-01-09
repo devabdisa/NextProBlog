@@ -10,7 +10,7 @@ const nextConfig: NextConfig = {
         port: "",
       },
       {
-        hostname: "blessed-stingray-393.convex.site",
+        hostname: "blessed-stingray-393.convex.cloud",
         protocol: "https",
         port: "",
       },
