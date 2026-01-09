@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { Heart, Coffee } from "lucide-react";
 
