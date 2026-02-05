@@ -32,7 +32,7 @@ export default function Home() {
           </h1>
 
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 animate-in fade-in slide-in-from-bottom-6 duration-700 delay-200">
-            A space where I share my journey in web development, design patterns, and the technology shaping our world.
+            A space where I share my journey in web development, life and everything.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-300">
@@ -146,7 +146,7 @@ export default function Home() {
                 About the Author
               </h2>
               <p className="text-zinc-400 mb-6 text-lg leading-relaxed">
-                Hi, I&apos;m Abdisa Ketema. I build accessible, pixel-perfect, and performant web experiences. 
+                Hi, I&apos;m Abdisa Ketema. I build accessible, useful, and performant web experiences. 
                 I love exploring new technologies and sharing what I learn along the way.
               </p>
               <Link
