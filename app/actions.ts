@@ -8,19 +8,26 @@ import { redirect } from "next/navigation";
 import { getToken } from "@/lib/auth-server";
 import { updateTag } from "next/cache";
 
-export async function CreateBlogAction(values: z.infer<typeof postSchema>) {
+export async function CreateBlogAction(formData: FormData) {
   try {
-    const parsed = postSchema.safeParse(values);
+    const title = formData.get("title") as string;
+    const content = formData.get("content") as string;
+    const image = formData.get("image") as File;
+
+    const parsed = postSchema.safeParse({ title, content, image });
 
     if (!parsed.success) {
-      throw new Error("Something went wrong");
+      console.error("Validation error:", parsed.error);
+      return {
+        error: "Validation failed",
+      };
     }
 
     const token = await getToken();
     const imageUrl = await fetchMutation(
       api.posts.generateImageUploadUrl,
       {},
-      { token }
+      { token },
     );
 
     const uploadResult = await fetch(imageUrl, {
@@ -31,7 +38,7 @@ export async function CreateBlogAction(values: z.infer<typeof postSchema>) {
       body: parsed.data.image,
     });
 
-    if (!uploadResult) {
+    if (!uploadResult.ok) {
       return {
         error: "Failed to upload image",
       };
@@ -39,16 +46,17 @@ export async function CreateBlogAction(values: z.infer<typeof postSchema>) {
 
     const { storageId } = await uploadResult.json();
 
-    fetchMutation(
+    await fetchMutation(
       api.posts.createPost,
       {
         body: parsed.data.content,
         title: parsed.data.title,
         imageStorageId: storageId,
       },
-      { token }
+      { token },
     );
-  } catch {
+  } catch (error) {
+    console.error("Error creating post:", error);
     return {
       error: "Failed to create post",
     };
